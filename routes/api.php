@@ -14,7 +14,7 @@ Route::get('/test', function () {
     ], 201);
 });
 
-// Route::post('/todos', [TodoController::class, 'store']);
+Route::post('/todos', [TodoController::class, 'store']);
 // Route::get('/todos', [TodoController::class, 'index']);
 // Route::get('/todos/{id}', [TodoController::class, 'show']);
 // Route::put('/todos/{id}', [TodoController::class, 'update']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoRequest;
 use App\Http\Resources\TodoResource;
+use App\Jobs\ProcessTodoJob;
 use App\Models\Todo;
 
 class TodoController extends Controller
@@ -85,6 +86,9 @@ class TodoController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
+
+        //đưa vào hàng đợi
+        ProcessTodoJob::dispatch($todo);
 
         return response()->json(
             [

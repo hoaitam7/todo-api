@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
+
 
 //mặc định laravel thêm tiền tố api => với test -> api/test
 Route::get('/test', function () {
@@ -17,4 +19,10 @@ Route::get('/test', function () {
 // Route::get('/todos/{id}', [TodoController::class, 'show']);
 // Route::put('/todos/{id}', [TodoController::class, 'update']);
 // Route::delete('/todos/{id}', [TodoController::class, 'destroy']);
-Route::apiResource('/todos', TodoController::class);
+// Route::apiResource('/todos', TodoController::class);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/todos', [TodoController::class, 'index']);
+});
